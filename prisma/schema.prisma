@@ -12,3 +12,38 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id        String @id @default(uuid())
+  name      String
+  email     String
+  password  String
+  createdAt String
+}
+
+model Watch {
+  id               String   @id @default(uuid())
+  name             String
+  price            Float
+  description      String
+  link             String
+  boxMaterial      String
+  boxSize          String
+  braceletMaterial String
+  dialColor        String
+  movimentType     String
+  picture          String[]
+  releaseYear      DateTime
+  extras           String
+  originCountry    String
+  Brand            Brand?   @relation(fields: [brandId], references: [id])
+  brandId          String?
+}
+
+model Brand {
+  id          String @id @default(uuid())
+  name        String
+  description String
+
+  watch Watch[]
+}
