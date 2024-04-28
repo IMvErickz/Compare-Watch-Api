@@ -14,11 +14,11 @@ datasource db {
 }
 
 model User {
-  id        String @id @default(uuid())
+  id        String   @id @default(uuid())
   name      String
   email     String
   password  String
-  createdAt String
+  createdAt DateTime @default(now())
 }
 
 model Watch {
@@ -33,11 +33,12 @@ model Watch {
   dialColor        String
   movimentType     String
   picture          String[]
-  releaseYear      DateTime
+  releaseYear      Int
   extras           String
   originCountry    String
   Brand            Brand?   @relation(fields: [brandId], references: [id])
   brandId          String?
+  createdAt        DateTime @default(now())
 }
 
 model Brand {
