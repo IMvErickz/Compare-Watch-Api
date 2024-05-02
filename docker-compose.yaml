@@ -1,14 +1,14 @@
-version: '3.9'
+version: "3.9"
 services:
   postgres:
     image: postgres:latest
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: $POSTGRES_USER
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
     ports:
-      - '5432:5432'
+      - "5432:5432"
     volumes:
-      - 
+      - postgres:/data/postgres
     networks:
       - compare-watch-networks
   app:
@@ -21,12 +21,16 @@ services:
     command: npm run dev
     build: .
     volumes:
-      - .:usr/src/api
+      - .:/usr/src/api
       - /usr/src/api/node_modules
     env_file: ./.env
     networks:
       - compare-watch-networks
 
-  networks:
-    compare-watch-networks:
-      name: compare-watch-networks
+networks:
+  compare-watch-networks:
+    driver: bridge
+
+volumes:
+  postgres:
+    driver: local
