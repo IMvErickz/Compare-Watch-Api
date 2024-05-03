@@ -12,19 +12,15 @@ export async function CreateUser(app: FastifyInstance) {
     });
 
     const { email, name, password } = userSchema.parse(request.body);
-   
-    const hashPassword =  bcrypt.hash(password, 10, function(err, hash) {
-        return hash
-    });
 
-    console.log(hashPassword);
-
-    await prisma.user.create({
-      data: {
-        email,
-        name,
-        password,
-      },
+    bcrypt.hash(password, 10, async function (err, hash) {
+      await prisma.user.create({
+        data: {
+          email,
+          name,
+          password: hash,
+        },
+      });
     });
 
     return response.status(201).send("sucess");

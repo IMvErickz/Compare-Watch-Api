@@ -8,6 +8,7 @@ import { getAllWatches } from "./controllers/watch/getAllWatches";
 import { GetWatchId } from "./controllers/watch/getWatchId";
 import { GetAllBrand } from "./controllers/brand/getAllBrand";
 import { GetBrandId } from "./controllers/brand/getBrandId";
+import { auth } from "./controllers/user/auth";
 import jwt from "@fastify/jwt";
 
 const app = Fastify({
@@ -24,6 +25,7 @@ app.register(jwt, {
 
 app.register(CreateUser);
 app.register(getUserId);
+app.register(auth)
 
 app.register(CreateWatch);
 app.register(getAllWatches);
