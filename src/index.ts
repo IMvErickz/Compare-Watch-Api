@@ -10,6 +10,7 @@ import { GetAllBrand } from "./controllers/brand/getAllBrand";
 import { GetBrandId } from "./controllers/brand/getBrandId";
 import { auth } from "./controllers/user/auth";
 import jwt from "@fastify/jwt";
+import { env } from "./env";
 
 const app = Fastify({
   logger: true,
@@ -20,7 +21,7 @@ app.register(Cors, {
 });
 
 app.register(jwt, {
-  secret: "comparaWatchAPI",
+  secret: env.SECRET,
 });
 
 app.register(CreateUser);
@@ -36,6 +37,7 @@ app.register(GetBrandId);
 
 app
   .listen({
-    port: 3333,
+    host: "0.0.0.0",
+    port: env.PORT,
   })
-  .then(() => console.log(chalk.blueBright("Server is running")));
+  .then(() => console.log(chalk.blueBright("🚀🚀🚀 Server is running")));
