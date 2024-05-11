@@ -11,30 +11,31 @@ services:
       - POSTGRES_DATABASE=$POSTGRES_DATABASE
     ports:
       - "5432:5432"
-    volumes:
-      - db:/data/db
-    networks:
-      - compare-watch-networks
-  api:
-    build: 
-      dockerfile: ./dockerfile
-      context: .
-    image: compare-watch-api
-    container_name: compare-watch-api
-    depends_on:
-      - postgres
-    links:
-      - postgres
-    env_file: ./.env
-    ports:
-      - 3333:3333
-    networks:
-      - compare-watch-networks
+    # volumes:
+    #   - db:/data/db
+    # networks:
+    #   - compare-watch-networks
+#   api:
+#     build: 
+#       dockerfile: ./dockerfile
+#       context: .
+#     image: compare-watch-api
+#     container_name: compare-watch-api
+#     depends_on:
+#       - postgres
+#     links:
+#       - postgres
+#     env_file: ./.env
+#     ports:
+#       - $PORT:$PORT
+#     command: ["npm", "run", "dev"]
+#     networks:
+#       - compare-watch-networks
 
-volumes:
-  db:
+# volumes:
+#   db:
 
-networks:
-  compare-watch-networks:
-    driver: bridge
+# networks:
+#   compare-watch-networks:
+#     driver: bridge
 
