@@ -14,6 +14,15 @@ export async function GetWatchId(app: FastifyInstance) {
         const watch = await prisma.watch.findUniqueOrThrow({
             where: {
                 id
+            },
+            include: {
+                Brand: {
+                    select: {
+                        description: true,
+                        name: true,
+                        id: true,
+                    }
+                }
             }
         })
 
