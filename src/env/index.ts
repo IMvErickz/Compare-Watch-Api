@@ -5,6 +5,7 @@ const envSchema = z.object({
   DATABASE_URL: z.string(),
   POSTGRES_USER: z.string(),
   POSTGRES_PASSWORD: z.string(),
+  POSTGRES_DATABASE: z.string(),
   NODE_ENV: z.enum(["develop", "test", "production"]).default("develop"),
   PORT: z.coerce.number().default(3333),
   SECRET: z.string().default('compareWatchAPISecret')
