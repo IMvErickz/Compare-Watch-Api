@@ -3,7 +3,6 @@ import { z } from "zod"
 import { prisma } from "../../lib/prisma"
 import { authenticate } from "../../plugins/authenticate";
 import bcrypt from 'bcrypt'
-import chalk from "chalk";
 
 
 export async function auth(fastify: FastifyInstance) {

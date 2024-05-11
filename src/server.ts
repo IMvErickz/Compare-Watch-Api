@@ -1,6 +1,5 @@
 import Fastify from "fastify";
 import Cors from "@fastify/cors";
-import chalk from "chalk";
 import { CreateUser } from "./controllers/user/create";
 import { getUserId } from "./controllers/user/getUserId";
 import { CreateWatch } from "./controllers/watch/create";
@@ -40,4 +39,4 @@ app
     host: "0.0.0.0",
     port: env.PORT,
   })
-  .then(() => console.log(chalk.blueBright("🚀🚀🚀 Server is running")));
+  .then(() => console.log("🚀🚀🚀 Server is running"));
