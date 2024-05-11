@@ -18,6 +18,7 @@ model User {
   name      String
   email     String   @unique
   password  String
+  favs      Watch[]
   createdAt DateTime @default(now())
 }
 
@@ -39,6 +40,8 @@ model Watch {
   Brand            Brand?   @relation(fields: [brandId], references: [id])
   brandId          String?
   createdAt        DateTime @default(now())
+  User             User?    @relation(fields: [userId], references: [id])
+  userId           String?
 }
 
 model Brand {
