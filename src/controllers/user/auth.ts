@@ -4,7 +4,7 @@ import { prisma } from "../../lib/prisma";
 import { authenticate } from "../../plugins/authenticate";
 import bcrypt from "bcrypt";
 
-export async function auth(fastify: FastifyInstance) {
+export async function Auth(fastify: FastifyInstance) {
   fastify.post("/auth", async (request, reply) => {
     const createUserBody = z.object({
       email: z.string().email("Email ou senha invalidos"),
@@ -16,6 +16,13 @@ export async function auth(fastify: FastifyInstance) {
     const user = await prisma.user.findUnique({
       where: {
         email,
+      },
+      include: {
+        favs: {
+          select: {
+            id: true,
+          },
+        },
       },
     });
 
@@ -40,7 +47,8 @@ export async function auth(fastify: FastifyInstance) {
       return reply.status(200).send({
         email: user.email,
         name: user.name,
-        accessToken: token,
+        favs: user.favs,
+        accessToken: `Bearer ${token}`,
       });
     }
   });

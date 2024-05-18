@@ -1,10 +1,10 @@
 import { FastifyInstance } from "fastify";
 import { prisma } from "../../lib/prisma";
 import { z } from "zod";
-import bcrypt from 'bcrypt'
+import bcrypt from "bcrypt";
 
 export async function CreateUser(app: FastifyInstance) {
-  app.post("/user", async (request, response) => {
+  app.post("/user", async (request, reply) => {
     const userSchema = z.object({
       name: z.string(),
       email: z.string(),
@@ -23,6 +23,6 @@ export async function CreateUser(app: FastifyInstance) {
       });
     });
 
-    return response.status(201).send("sucess");
+    return reply.status(201).send("sucess");
   });
 }
